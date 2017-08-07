@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50505
-Source Host           : 127.0.0.1:3306
+Source Server         : maple
+Source Server Version : 50624
+Source Host           : localhost:3306
 Source Database       : specialty
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-08-05 10:41:23
+Date: 2017-08-07 15:42:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for classification
+-- Table structure for `classification`
 -- ----------------------------
 DROP TABLE IF EXISTS `classification`;
 CREATE TABLE `classification` (
@@ -24,14 +24,18 @@ CREATE TABLE `classification` (
   `class_name` varchar(255) NOT NULL COMMENT '类别名称',
   PRIMARY KEY (`class_id`),
   KEY `class_name` (`class_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of classification
 -- ----------------------------
+INSERT INTO `classification` VALUES ('1', '农副      ');
+INSERT INTO `classification` VALUES ('2', '干货');
+INSERT INTO `classification` VALUES ('4', '海产');
+INSERT INTO `classification` VALUES ('3', '零食');
 
 -- ----------------------------
--- Table structure for collection
+-- Table structure for `collection`
 -- ----------------------------
 DROP TABLE IF EXISTS `collection`;
 CREATE TABLE `collection` (
@@ -51,7 +55,7 @@ CREATE TABLE `collection` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for comment
+-- Table structure for `comment`
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -73,7 +77,7 @@ CREATE TABLE `comment` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for goods
+-- Table structure for `goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
@@ -88,14 +92,24 @@ CREATE TABLE `goods` (
   `recommend` tinyint(4) NOT NULL COMMENT '推荐商品标志',
   `url` varchar(255) NOT NULL COMMENT '图片路径',
   PRIMARY KEY (`good_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
+INSERT INTO `goods` VALUES ('1', '土豆', '23123', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '111');
+INSERT INTO `goods` VALUES ('2', '瓜子', '2313', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '222');
+INSERT INTO `goods` VALUES ('3', '薯片', '1231', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '333');
+INSERT INTO `goods` VALUES ('4', '鲜虾', '12', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '12');
+INSERT INTO `goods` VALUES ('5', '海带', '0', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '');
+INSERT INTO `goods` VALUES ('6', '1111', '0', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '');
+INSERT INTO `goods` VALUES ('7', '22222', '0', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '');
+INSERT INTO `goods` VALUES ('8', '23123123', '0', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '');
+INSERT INTO `goods` VALUES ('9', '谁打谁', '0', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '');
+INSERT INTO `goods` VALUES ('10', '好了', '0', '0', '0', '0', '0000-00-00 00:00:00', '', '0', '');
 
 -- ----------------------------
--- Table structure for goods_classification
+-- Table structure for `goods_classification`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods_classification`;
 CREATE TABLE `goods_classification` (
@@ -107,14 +121,24 @@ CREATE TABLE `goods_classification` (
   KEY `fk_goods_classification_goods_good_id` (`good_id`),
   CONSTRAINT `fk_goods_classification_classification_class_name` FOREIGN KEY (`class_name`) REFERENCES `classification` (`class_name`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_goods_classification_goods_good_id` FOREIGN KEY (`good_id`) REFERENCES `goods` (`good_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods_classification
 -- ----------------------------
+INSERT INTO `goods_classification` VALUES ('1', '1', '农副');
+INSERT INTO `goods_classification` VALUES ('2', '4', '海产');
+INSERT INTO `goods_classification` VALUES ('3', '3', '零食');
+INSERT INTO `goods_classification` VALUES ('4', '2', '干货');
+INSERT INTO `goods_classification` VALUES ('5', '5', '海产');
+INSERT INTO `goods_classification` VALUES ('6', '6', '海产');
+INSERT INTO `goods_classification` VALUES ('15', '7', '海产');
+INSERT INTO `goods_classification` VALUES ('16', '8', '海产');
+INSERT INTO `goods_classification` VALUES ('17', '9', '海产');
+INSERT INTO `goods_classification` VALUES ('19', '10', '海产');
 
 -- ----------------------------
--- Table structure for goods_receipt
+-- Table structure for `goods_receipt`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods_receipt`;
 CREATE TABLE `goods_receipt` (
@@ -133,7 +157,7 @@ CREATE TABLE `goods_receipt` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for orders
+-- Table structure for `orders`
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
@@ -157,7 +181,7 @@ CREATE TABLE `orders` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for recent_browse
+-- Table structure for `recent_browse`
 -- ----------------------------
 DROP TABLE IF EXISTS `recent_browse`;
 CREATE TABLE `recent_browse` (
@@ -175,7 +199,7 @@ CREATE TABLE `recent_browse` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for shopping_cart
+-- Table structure for `shopping_cart`
 -- ----------------------------
 DROP TABLE IF EXISTS `shopping_cart`;
 CREATE TABLE `shopping_cart` (
@@ -195,7 +219,7 @@ CREATE TABLE `shopping_cart` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for users
+-- Table structure for `users`
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -209,8 +233,10 @@ CREATE TABLE `users` (
   `telephone` varchar(255) NOT NULL COMMENT '绑定电话',
   `url` varchar(255) NOT NULL COMMENT '头像路径',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
+INSERT INTO `users` VALUES ('1', '123', 'asd', '0000-00-00 00:00:00', '0', '', '', '123', '');
+INSERT INTO `users` VALUES ('2', 'lehasdad', 'asdad1231', '0000-00-00 00:00:00', '0', '', '', '18454544545', '');
