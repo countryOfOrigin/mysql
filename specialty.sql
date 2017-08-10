@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50505
-Source Host           : 127.0.0.1:3306
+Source Server         : maple
+Source Server Version : 50624
+Source Host           : localhost:3306
 Source Database       : specialty
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-08-08 10:55:09
+Date: 2017-08-10 15:34:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for classification
+-- Table structure for `classification`
 -- ----------------------------
 DROP TABLE IF EXISTS `classification`;
 CREATE TABLE `classification` (
@@ -24,7 +24,7 @@ CREATE TABLE `classification` (
   `class_name` varchar(255) NOT NULL COMMENT '类别名称',
   PRIMARY KEY (`class_id`),
   KEY `class_name` (`class_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of classification
@@ -39,7 +39,7 @@ INSERT INTO `classification` VALUES ('5', '酒茶');
 INSERT INTO `classification` VALUES ('3', '零食');
 
 -- ----------------------------
--- Table structure for collection
+-- Table structure for `collection`
 -- ----------------------------
 DROP TABLE IF EXISTS `collection`;
 CREATE TABLE `collection` (
@@ -52,14 +52,18 @@ CREATE TABLE `collection` (
   KEY `fk_collection_users_user_id` (`user_id`),
   CONSTRAINT `fk_collection_goods_good_id` FOREIGN KEY (`good_id`) REFERENCES `goods` (`good_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_collection_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of collection
 -- ----------------------------
+INSERT INTO `collection` VALUES ('1', '1', '1', '0000-00-00');
+INSERT INTO `collection` VALUES ('2', '1', '2', '0000-00-00');
+INSERT INTO `collection` VALUES ('3', '3', '3', '0000-00-00');
+INSERT INTO `collection` VALUES ('4', '3', '2', '0000-00-00');
 
 -- ----------------------------
--- Table structure for comment
+-- Table structure for `comment`
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -81,7 +85,7 @@ CREATE TABLE `comment` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for goods
+-- Table structure for `goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
@@ -96,7 +100,7 @@ CREATE TABLE `goods` (
   `recommend` tinyint(4) NOT NULL COMMENT '推荐商品标志',
   `url` varchar(255) NOT NULL COMMENT '图片路径',
   PRIMARY KEY (`good_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods
@@ -115,9 +119,10 @@ INSERT INTO `goods` VALUES ('11', '哈尔滨啤酒', '3', '0', '0', '0', '0000-0
 INSERT INTO `goods` VALUES ('12', '人参', '20', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/yangsheng/12\r\n.jpg');
 INSERT INTO `goods` VALUES ('13', '苹果', '2', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shengxian/13\r\n.jpg');
 INSERT INTO `goods` VALUES ('14', '居家', '20', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/jujia/14\r\n.jpg');
+INSERT INTO `goods` VALUES ('15', '居家', '2323', '0', '0', '0', '0000-00-00', '', '0', '');
 
 -- ----------------------------
--- Table structure for goods_classification
+-- Table structure for `goods_classification`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods_classification`;
 CREATE TABLE `goods_classification` (
@@ -129,7 +134,7 @@ CREATE TABLE `goods_classification` (
   KEY `fk_goods_classification_goods_good_id` (`good_id`),
   CONSTRAINT `fk_goods_classification_classification_class_name` FOREIGN KEY (`class_name`) REFERENCES `classification` (`class_name`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_goods_classification_goods_good_id` FOREIGN KEY (`good_id`) REFERENCES `goods` (`good_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods_classification
@@ -148,9 +153,10 @@ INSERT INTO `goods_classification` VALUES ('20', '11', '酒茶');
 INSERT INTO `goods_classification` VALUES ('21', '12', '养生');
 INSERT INTO `goods_classification` VALUES ('22', '13', '生鲜');
 INSERT INTO `goods_classification` VALUES ('24', '14', '居家');
+INSERT INTO `goods_classification` VALUES ('26', '15', '居家');
 
 -- ----------------------------
--- Table structure for goods_receipt
+-- Table structure for `goods_receipt`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods_receipt`;
 CREATE TABLE `goods_receipt` (
@@ -162,14 +168,16 @@ CREATE TABLE `goods_receipt` (
   PRIMARY KEY (`receipt_id`),
   KEY `fk_goods_receipt_users_user_id` (`user_id`),
   CONSTRAINT `fk_goods_receipt_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods_receipt
 -- ----------------------------
+INSERT INTO `goods_receipt` VALUES ('1', '1', '2', '3', '4');
+INSERT INTO `goods_receipt` VALUES ('2', '1', '2', '2', '3');
 
 -- ----------------------------
--- Table structure for orders
+-- Table structure for `orders`
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
@@ -178,7 +186,8 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL,
   `good_id` int(11) NOT NULL,
   `receipt_id` int(11) NOT NULL,
-  `state` int(11) NOT NULL COMMENT '状态',
+  `count` int(11) NOT NULL,
+  `state` varchar(11) NOT NULL COMMENT '状态',
   PRIMARY KEY (`order_id`),
   KEY `fk_orders_goods_good_id` (`good_id`),
   KEY `fk_orders_users_user_id` (`user_id`),
@@ -186,14 +195,16 @@ CREATE TABLE `orders` (
   CONSTRAINT `fk_orders_goods_good_id` FOREIGN KEY (`good_id`) REFERENCES `goods` (`good_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_orders_goods_receipt_receipt_id` FOREIGN KEY (`receipt_id`) REFERENCES `goods_receipt` (`receipt_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_orders_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
+INSERT INTO `orders` VALUES ('1', '0000-00-00', '1', '1', '1', '3', '待付款');
+INSERT INTO `orders` VALUES ('3', '0000-00-00', '1', '3', '2', '5', '待发货');
 
 -- ----------------------------
--- Table structure for recent_browse
+-- Table structure for `recent_browse`
 -- ----------------------------
 DROP TABLE IF EXISTS `recent_browse`;
 CREATE TABLE `recent_browse` (
@@ -211,7 +222,7 @@ CREATE TABLE `recent_browse` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for shopping_cart
+-- Table structure for `shopping_cart`
 -- ----------------------------
 DROP TABLE IF EXISTS `shopping_cart`;
 CREATE TABLE `shopping_cart` (
@@ -224,14 +235,17 @@ CREATE TABLE `shopping_cart` (
   KEY `fk_shopping_cart_users_user_id` (`user_id`),
   CONSTRAINT `fk_shopping_cart_goods_good_id` FOREIGN KEY (`good_id`) REFERENCES `goods` (`good_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_shopping_cart_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shopping_cart
 -- ----------------------------
+INSERT INTO `shopping_cart` VALUES ('1', '1', '2', '12');
+INSERT INTO `shopping_cart` VALUES ('3', '2', '3', '17');
+INSERT INTO `shopping_cart` VALUES ('5', '2', '4', '20');
 
 -- ----------------------------
--- Table structure for users
+-- Table structure for `users`
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -245,10 +259,11 @@ CREATE TABLE `users` (
   `telephone` varchar(255) NOT NULL COMMENT '绑定电话',
   `url` varchar(255) NOT NULL COMMENT '头像路径',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '123', 'asd', '0000-00-00', '0', '', '', '123', '');
+INSERT INTO `users` VALUES ('1', '123', 'asd', '0000-00-00', '3', '', '', '123', '1231231');
 INSERT INTO `users` VALUES ('2', 'lehasdad', 'asdad1231', '0000-00-00', '0', '', '', '18454544545', '');
+INSERT INTO `users` VALUES ('3', '', '', '0000-00-00', '0', '', '', '', '');
