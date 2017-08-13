@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-08-10 15:40:16
+Date: 2017-08-13 14:36:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -89,6 +89,7 @@ CREATE TABLE `comment` (
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
+  `sales` int(11) DEFAULT NULL,
   `good_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `price` decimal(10,0) NOT NULL COMMENT '价格',
@@ -105,21 +106,21 @@ CREATE TABLE `goods` (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('1', '土豆', '23123', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/nongfu/01.jpg');
-INSERT INTO `goods` VALUES ('2', '瓜子', '2313', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/ganhuo/02.jpg');
-INSERT INTO `goods` VALUES ('3', '薯片', '1231', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/lingshi/03.jpg');
-INSERT INTO `goods` VALUES ('4', '鲜虾', '12', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/04.jpg');
-INSERT INTO `goods` VALUES ('5', '海带', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/05.jpg');
-INSERT INTO `goods` VALUES ('6', '1111', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/06.jpg');
-INSERT INTO `goods` VALUES ('7', '22222', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/07.jpg');
-INSERT INTO `goods` VALUES ('8', '23123123', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/08.jpg');
-INSERT INTO `goods` VALUES ('9', '谁打谁', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/09.jpg');
-INSERT INTO `goods` VALUES ('10', '好了', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/10.jpg');
-INSERT INTO `goods` VALUES ('11', '哈尔滨啤酒', '3', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/jiucha/11.jpg');
-INSERT INTO `goods` VALUES ('12', '人参', '20', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/yangsheng/12\r\n.jpg');
-INSERT INTO `goods` VALUES ('13', '苹果', '2', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shengxian/13\r\n.jpg');
-INSERT INTO `goods` VALUES ('14', '居家', '20', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/jujia/14\r\n.jpg');
-INSERT INTO `goods` VALUES ('15', '居家', '2323', '0', '0', '0', '0000-00-00', '', '0', '');
+INSERT INTO `goods` VALUES ('2', '1', '土豆', '23123', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/nongfu/01.jpg');
+INSERT INTO `goods` VALUES ('3', '2', '瓜子', '2313', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/ganhuo/02.jpg');
+INSERT INTO `goods` VALUES ('44', '3', '薯片', '1231', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/lingshi/03.jpg');
+INSERT INTO `goods` VALUES ('23', '4', '鲜虾', '12', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/04.jpg');
+INSERT INTO `goods` VALUES ('221', '5', '海带', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/05.jpg');
+INSERT INTO `goods` VALUES ('545', '6', '1111', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/06.jpg');
+INSERT INTO `goods` VALUES ('23', '7', '22222', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/07.jpg');
+INSERT INTO `goods` VALUES ('56', '8', '23123123', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/08.jpg');
+INSERT INTO `goods` VALUES ('43', '9', '谁打谁', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/09.jpg');
+INSERT INTO `goods` VALUES ('11', '10', '好了', '0', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shuichan/10.jpg');
+INSERT INTO `goods` VALUES ('23', '11', '哈尔滨啤酒', '3', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/jiucha/11.jpg');
+INSERT INTO `goods` VALUES ('87', '12', '人参', '20', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/yangsheng/12\r\n.jpg');
+INSERT INTO `goods` VALUES ('555', '13', '苹果', '2', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/shengxian/13\r\n.jpg');
+INSERT INTO `goods` VALUES ('435', '14', '居家', '20', '0', '0', '0', '0000-00-00', '', '0', '../../static/img/jujia/14\r\n.jpg');
+INSERT INTO `goods` VALUES ('43', '15', '居家', '2323', '0', '0', '0', '0000-00-00', '', '0', '');
 
 -- ----------------------------
 -- Table structure for `goods_classification`
@@ -168,13 +169,14 @@ CREATE TABLE `goods_receipt` (
   PRIMARY KEY (`receipt_id`),
   KEY `fk_goods_receipt_users_user_id` (`user_id`),
   CONSTRAINT `fk_goods_receipt_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods_receipt
 -- ----------------------------
 INSERT INTO `goods_receipt` VALUES ('1', '1', '2', '3', '4');
 INSERT INTO `goods_receipt` VALUES ('2', '1', '2', '2', '3');
+INSERT INTO `goods_receipt` VALUES ('3', '2', '3', '4', '5');
 
 -- ----------------------------
 -- Table structure for `orders`
@@ -235,14 +237,14 @@ CREATE TABLE `shopping_cart` (
   KEY `fk_shopping_cart_users_user_id` (`user_id`),
   CONSTRAINT `fk_shopping_cart_goods_good_id` FOREIGN KEY (`good_id`) REFERENCES `goods` (`good_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_shopping_cart_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shopping_cart
 -- ----------------------------
 INSERT INTO `shopping_cart` VALUES ('1', '1', '2', '12');
 INSERT INTO `shopping_cart` VALUES ('3', '2', '3', '17');
-INSERT INTO `shopping_cart` VALUES ('5', '2', '4', '20');
+INSERT INTO `shopping_cart` VALUES ('7', '2', '4', '0');
 
 -- ----------------------------
 -- Table structure for `users`
