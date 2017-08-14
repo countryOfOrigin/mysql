@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-08-13 14:36:41
+Date: 2017-08-14 10:08:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -166,6 +166,9 @@ CREATE TABLE `goods_receipt` (
   `name` varchar(255) NOT NULL COMMENT '收货人姓名',
   `telephone` varchar(255) NOT NULL COMMENT '收货人电话',
   `address` varchar(255) NOT NULL COMMENT '收货地址',
+  `province` varchar(255) DEFAULT NULL,
+  `district` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`receipt_id`),
   KEY `fk_goods_receipt_users_user_id` (`user_id`),
   CONSTRAINT `fk_goods_receipt_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -174,9 +177,9 @@ CREATE TABLE `goods_receipt` (
 -- ----------------------------
 -- Records of goods_receipt
 -- ----------------------------
-INSERT INTO `goods_receipt` VALUES ('1', '1', '2', '3', '4');
-INSERT INTO `goods_receipt` VALUES ('2', '1', '2', '2', '3');
-INSERT INTO `goods_receipt` VALUES ('3', '2', '3', '4', '5');
+INSERT INTO `goods_receipt` VALUES ('1', '1', '2', '3', '黑龙江省哈尔滨市南岗区', '黑龙江省', '哈尔滨市', '南岗区');
+INSERT INTO `goods_receipt` VALUES ('2', '1', '2', '2', '海南省海口市~~', '海南省', '海口市', '~~');
+INSERT INTO `goods_receipt` VALUES ('3', '2', '3', '4', '北京市朝阳区', '', '北京市', '朝阳区');
 
 -- ----------------------------
 -- Table structure for `orders`
