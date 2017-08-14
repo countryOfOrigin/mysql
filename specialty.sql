@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-08-14 10:15:14
+Date: 2017-08-14 14:53:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -165,21 +165,21 @@ CREATE TABLE `goods_receipt` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL COMMENT '收货人姓名',
   `telephone` varchar(255) NOT NULL COMMENT '收货人电话',
-  `address` varchar(255) NOT NULL COMMENT '收货地址',
   `province` varchar(255) DEFAULT NULL,
-  `district` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
+  `district` varchar(255) DEFAULT NULL,
+  `address` varchar(255) NOT NULL COMMENT '收货地址',
   PRIMARY KEY (`receipt_id`),
   KEY `fk_goods_receipt_users_user_id` (`user_id`),
   CONSTRAINT `fk_goods_receipt_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods_receipt
 -- ----------------------------
-INSERT INTO `goods_receipt` VALUES ('1', '1', '2', '3', '南开街82号', '黑龙江省', '哈尔滨市', '南岗区');
-INSERT INTO `goods_receipt` VALUES ('2', '1', '2', '2', '尚志大街23号', '海南省', '海口市', '~~');
-INSERT INTO `goods_receipt` VALUES ('3', '2', '3', '4', '红旗大街1111号', '北京市', '市辖区', '朝阳区');
+INSERT INTO `goods_receipt` VALUES ('2', '1', '2', '2', '海南省', '海口市', '~~·', '尚志大街23号');
+INSERT INTO `goods_receipt` VALUES ('3', '2', '叶女士', '2234', '浙江省', '杭州市', '什么区', '一曼街');
+INSERT INTO `goods_receipt` VALUES ('4', '3', '啊', '223', '山西省', '33', '23123', '1');
 
 -- ----------------------------
 -- Table structure for `orders`
@@ -205,7 +205,6 @@ CREATE TABLE `orders` (
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES ('1', '0000-00-00', '1', '1', '1', '3', '待付款');
 INSERT INTO `orders` VALUES ('3', '0000-00-00', '1', '3', '2', '5', '待发货');
 
 -- ----------------------------
@@ -246,7 +245,7 @@ CREATE TABLE `shopping_cart` (
 -- Records of shopping_cart
 -- ----------------------------
 INSERT INTO `shopping_cart` VALUES ('1', '1', '2', '12');
-INSERT INTO `shopping_cart` VALUES ('3', '2', '3', '17');
+INSERT INTO `shopping_cart` VALUES ('3', '2', '3', '33');
 INSERT INTO `shopping_cart` VALUES ('7', '2', '4', '0');
 
 -- ----------------------------
