@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : coot
-Source Server Version : 50173
-Source Host           : bdm243423386.my3w.com:3306
-Source Database       : bdm243423386_db
+Source Server         : maple
+Source Server Version : 50624
+Source Host           : localhost:3306
+Source Database       : specialty
 
 Target Server Type    : MYSQL
-Target Server Version : 50173
+Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-08-15 11:56:47
+Date: 2017-08-15 15:46:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for classification
+-- Table structure for `classification`
 -- ----------------------------
 DROP TABLE IF EXISTS `classification`;
 CREATE TABLE `classification` (
@@ -39,7 +39,7 @@ INSERT INTO `classification` VALUES ('5', '酒茶');
 INSERT INTO `classification` VALUES ('3', '零食');
 
 -- ----------------------------
--- Table structure for collection
+-- Table structure for `collection`
 -- ----------------------------
 DROP TABLE IF EXISTS `collection`;
 CREATE TABLE `collection` (
@@ -62,7 +62,7 @@ INSERT INTO `collection` VALUES ('2', '2', '1', '0000-00-00');
 INSERT INTO `collection` VALUES ('3', '3', '7', '0000-00-00');
 
 -- ----------------------------
--- Table structure for comment
+-- Table structure for `comment`
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -86,18 +86,16 @@ INSERT INTO `comment` VALUES ('1', '1', '12', 'asdasd', '6', '0000-00-00');
 INSERT INTO `comment` VALUES ('2', '2', '1', 'asdasd', '3', '0000-00-00');
 
 -- ----------------------------
--- Table structure for coupon
+-- Table structure for `coupon`
 -- ----------------------------
 DROP TABLE IF EXISTS `coupon`;
 CREATE TABLE `coupon` (
   `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
   `preferential` decimal(10,0) NOT NULL COMMENT '优惠金额',
   `limit` decimal(10,0) NOT NULL COMMENT '限制金额',
   `get_time` date NOT NULL COMMENT '获得时间',
   `deadline` date NOT NULL COMMENT '截至时间',
-  PRIMARY KEY (`coupon_id`),
-  KEY `fk_coupon_users_user_id` (`user_id`)
+  PRIMARY KEY (`coupon_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=gbk;
 
 -- ----------------------------
@@ -105,7 +103,7 @@ CREATE TABLE `coupon` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for goods
+-- Table structure for `goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
@@ -142,7 +140,7 @@ INSERT INTO `goods` VALUES ('14', '居家', '20', '10', '0', '0', '0000-00-00', 
 INSERT INTO `goods` VALUES ('15', '居家', '2323', '10', '0', '0', '0000-00-00', 'aa', '0', '');
 
 -- ----------------------------
--- Table structure for goods_classification
+-- Table structure for `goods_classification`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods_classification`;
 CREATE TABLE `goods_classification` (
@@ -176,7 +174,7 @@ INSERT INTO `goods_classification` VALUES ('24', '14', '居家');
 INSERT INTO `goods_classification` VALUES ('26', '15', '居家');
 
 -- ----------------------------
--- Table structure for goods_receipt
+-- Table structure for `goods_receipt`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods_receipt`;
 CREATE TABLE `goods_receipt` (
@@ -197,11 +195,10 @@ CREATE TABLE `goods_receipt` (
 -- Records of goods_receipt
 -- ----------------------------
 INSERT INTO `goods_receipt` VALUES ('1', '1', 'qwe', '741', '', '', '', 'address');
-INSERT INTO `goods_receipt` VALUES ('2', '1', 'zxc', '751', '', '', '', 'address');
 INSERT INTO `goods_receipt` VALUES ('3', '2', 'wsx', '741', '', '', '', 'address');
 
 -- ----------------------------
--- Table structure for orders
+-- Table structure for `orders`
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
@@ -226,11 +223,10 @@ CREATE TABLE `orders` (
 -- Records of orders
 -- ----------------------------
 INSERT INTO `orders` VALUES ('1', '0000-00-00', '1', '12', '1', '3', '3', '60');
-INSERT INTO `orders` VALUES ('2', '0000-00-00', '2', '1', '2', '4', '3', '9');
 INSERT INTO `orders` VALUES ('3', '0000-00-00', '3', '7', '3', '6', '4', '6');
 
 -- ----------------------------
--- Table structure for recent_browse
+-- Table structure for `recent_browse`
 -- ----------------------------
 DROP TABLE IF EXISTS `recent_browse`;
 CREATE TABLE `recent_browse` (
@@ -251,7 +247,7 @@ INSERT INTO `recent_browse` VALUES ('7', '3', '0000-00-00');
 INSERT INTO `recent_browse` VALUES ('12', '1', '0000-00-00');
 
 -- ----------------------------
--- Table structure for sales
+-- Table structure for `sales`
 -- ----------------------------
 DROP TABLE IF EXISTS `sales`;
 CREATE TABLE `sales` (
@@ -272,7 +268,22 @@ INSERT INTO `sales` VALUES ('2', '1', '4', '0000-00-00');
 INSERT INTO `sales` VALUES ('3', '7', '6', '0000-00-00');
 
 -- ----------------------------
--- Table structure for shopping_cart
+-- Table structure for `search`
+-- ----------------------------
+DROP TABLE IF EXISTS `search`;
+CREATE TABLE `search` (
+  `content` varchar(255) DEFAULT NULL,
+  `search_id` int(11) NOT NULL AUTO_INCREMENT,
+  `times` int(11) DEFAULT NULL,
+  PRIMARY KEY (`search_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of search
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `shopping_cart`
 -- ----------------------------
 DROP TABLE IF EXISTS `shopping_cart`;
 CREATE TABLE `shopping_cart` (
@@ -295,7 +306,7 @@ INSERT INTO `shopping_cart` VALUES ('2', '2', '1', '4');
 INSERT INTO `shopping_cart` VALUES ('3', '3', '7', '6');
 
 -- ----------------------------
--- Table structure for users
+-- Table structure for `users`
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -317,3 +328,22 @@ CREATE TABLE `users` (
 INSERT INTO `users` VALUES ('1', 'asd1', 'asdf', '0000-00-00', '0', 'email', '0', '123', 'uploads/p1.jpg');
 INSERT INTO `users` VALUES ('2', 'asd2', 'asdf', '0000-00-00', '0', 'email', '0', '456', 'uploads/p1.jpg');
 INSERT INTO `users` VALUES ('3', 'asd3', 'asdf', '0000-00-00', '0', 'email', '0', '852', 'uploads/p1.jpg');
+
+-- ----------------------------
+-- Table structure for `user_coupon`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_coupon`;
+CREATE TABLE `user_coupon` (
+  `cid` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `coupon_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`cid`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of user_coupon
+-- ----------------------------
+INSERT INTO `user_coupon` VALUES ('1', '1', '1');
+INSERT INTO `user_coupon` VALUES ('2', '1', '2');
+INSERT INTO `user_coupon` VALUES ('3', '1', '3');
+INSERT INTO `user_coupon` VALUES ('4', '2', '2');
