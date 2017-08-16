@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-08-15 15:46:42
+Date: 2017-08-16 10:24:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -272,15 +272,27 @@ INSERT INTO `sales` VALUES ('3', '7', '6', '0000-00-00');
 -- ----------------------------
 DROP TABLE IF EXISTS `search`;
 CREATE TABLE `search` (
-  `content` varchar(255) DEFAULT NULL,
   `search_id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(255) NOT NULL,
   `times` int(11) DEFAULT NULL,
   PRIMARY KEY (`search_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of search
 -- ----------------------------
+INSERT INTO `search` VALUES ('1', '哈哈', '22');
+INSERT INTO `search` VALUES ('2', '吃翔', '890');
+INSERT INTO `search` VALUES ('3', '你好呀', '56');
+INSERT INTO `search` VALUES ('4', '四云奶盖贡茶', '333');
+INSERT INTO `search` VALUES ('5', '11', '22');
+INSERT INTO `search` VALUES ('6', '33', '44');
+INSERT INTO `search` VALUES ('7', '555', '66');
+INSERT INTO `search` VALUES ('8', 'asda', '231');
+INSERT INTO `search` VALUES ('9', '大法师', '23');
+INSERT INTO `search` VALUES ('10', '阿达', '33');
+INSERT INTO `search` VALUES ('11', '一月又一月晕', '231');
+INSERT INTO `search` VALUES ('12', '虾', '1');
 
 -- ----------------------------
 -- Table structure for `shopping_cart`
@@ -296,14 +308,16 @@ CREATE TABLE `shopping_cart` (
   KEY `fk_shopping_cart_users_user_id` (`user_id`),
   CONSTRAINT `fk_shopping_cart_goods_good_id` FOREIGN KEY (`good_id`) REFERENCES `goods` (`good_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_shopping_cart_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shopping_cart
 -- ----------------------------
-INSERT INTO `shopping_cart` VALUES ('1', '1', '12', '3');
 INSERT INTO `shopping_cart` VALUES ('2', '2', '1', '4');
 INSERT INTO `shopping_cart` VALUES ('3', '3', '7', '6');
+INSERT INTO `shopping_cart` VALUES ('5', '1', '2', '5');
+INSERT INTO `shopping_cart` VALUES ('6', '1', '3', '49');
+INSERT INTO `shopping_cart` VALUES ('7', '1', '14', '1');
 
 -- ----------------------------
 -- Table structure for `users`
