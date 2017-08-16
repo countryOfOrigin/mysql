@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-08-16 13:56:37
+Date: 2017-08-16 14:07:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -107,7 +107,6 @@ CREATE TABLE `coupon` (
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
-  `url_all` varchar(255) DEFAULT NULL,
   `good_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `price` decimal(10,0) NOT NULL COMMENT '价格',
@@ -118,27 +117,28 @@ CREATE TABLE `goods` (
   `parameter` varchar(255) NOT NULL COMMENT '产品参数',
   `recommend` tinyint(4) NOT NULL COMMENT '推荐商品标志',
   `url` varchar(255) NOT NULL COMMENT '图片路径',
+  `url_all` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`good_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES (null, '1', '土豆', '2', '10', '0', '333', '0000-00-00', 'aa', '0', '../../static/img/nongfu/01.jpg');
-INSERT INTO `goods` VALUES (null, '2', '瓜子', '2313', '10', '0', '23', '0000-00-00', 'aa', '0', '../../static/img/ganhuo/02.jpg');
-INSERT INTO `goods` VALUES (null, '3', '薯片', '1231', '10', '0', '222', '0000-00-00', 'aa', '0', '../../static/img/lingshi/03.jpg');
-INSERT INTO `goods` VALUES (null, '4', '鲜虾', '12', '10', '0', '12', '0000-00-00', 'aa', '0', '../../static/img/shuichan/04.jpg');
-INSERT INTO `goods` VALUES (null, '5', '海带', '0', '10', '0', '3', '0000-00-00', 'aa', '0', '../../static/img/shuichan/05.jpg');
-INSERT INTO `goods` VALUES (null, '6', '1111', '0', '10', '0', '232', '0000-00-00', 'aa', '0', '../../static/img/shuichan/06.jpg');
-INSERT INTO `goods` VALUES (null, '7', '22222', '1', '10', '0', '0', '0000-00-00', 'aa', '0', '../../static/img/shuichan/07.jpg');
-INSERT INTO `goods` VALUES (null, '8', '23123123', '0', '10', '0', '23', '0000-00-00', 'aa', '0', '../../static/img/shuichan/08.jpg');
-INSERT INTO `goods` VALUES (null, '9', '谁打谁', '0', '10', '0', '0', '0000-00-00', 'aa', '0', '../../static/img/shuichan/09.jpg');
-INSERT INTO `goods` VALUES (null, '10', '好了', '0', '10', '0', '12', '0000-00-00', 'aa', '0', '../../static/img/shuichan/10.jpg');
-INSERT INTO `goods` VALUES (null, '11', '哈尔滨啤酒', '3', '10', '0', '0', '0000-00-00', 'aa', '0', '../../static/img/jiucha/11.jpg');
-INSERT INTO `goods` VALUES (null, '12', '人参', '20', '10', '0', '44', '0000-00-00', 'aa', '0', '../../static/img/yangsheng/12\r\n.jpg');
-INSERT INTO `goods` VALUES (null, '13', '苹果', '2', '10', '0', '3', '0000-00-00', 'aa', '0', '../../static/img/shengxian/13\r\n.jpg');
-INSERT INTO `goods` VALUES (null, '14', '居家1', '20', '10', '0', '1', '0000-00-00', 'aa', '0', '../../static/img/jujia/14\r\n.jpg');
-INSERT INTO `goods` VALUES (null, '15', '居家2', '2323', '10', '0', '333', '0000-00-00', 'aa', '0', '');
+INSERT INTO `goods` VALUES ('1', '土豆', '2', '10', '0', '333', '0000-00-00', 'aa', '0', '../../static/img/nongfu/01.jpg', null);
+INSERT INTO `goods` VALUES ('2', '瓜子', '2313', '10', '0', '23', '0000-00-00', 'aa', '0', '../../static/img/ganhuo/02.jpg', null);
+INSERT INTO `goods` VALUES ('3', '薯片', '1231', '10', '0', '222', '0000-00-00', 'aa', '0', '../../static/img/lingshi/03.jpg', null);
+INSERT INTO `goods` VALUES ('4', '鲜虾', '12', '10', '0', '12', '0000-00-00', 'aa', '0', '../../static/img/shuichan/04.jpg', null);
+INSERT INTO `goods` VALUES ('5', '海带', '0', '10', '0', '3', '0000-00-00', 'aa', '0', '../../static/img/shuichan/05.jpg', null);
+INSERT INTO `goods` VALUES ('6', '1111', '0', '10', '0', '232', '0000-00-00', 'aa', '0', '../../static/img/shuichan/06.jpg', null);
+INSERT INTO `goods` VALUES ('7', '22222', '1', '10', '0', '0', '0000-00-00', 'aa', '0', '../../static/img/shuichan/07.jpg', null);
+INSERT INTO `goods` VALUES ('8', '23123123', '0', '10', '0', '23', '0000-00-00', 'aa', '0', '../../static/img/shuichan/08.jpg', null);
+INSERT INTO `goods` VALUES ('9', '谁打谁', '0', '10', '0', '0', '0000-00-00', 'aa', '0', '../../static/img/shuichan/09.jpg', null);
+INSERT INTO `goods` VALUES ('10', '好了', '0', '10', '0', '12', '0000-00-00', 'aa', '0', '../../static/img/shuichan/10.jpg', null);
+INSERT INTO `goods` VALUES ('11', '哈尔滨啤酒', '3', '10', '0', '0', '0000-00-00', 'aa', '0', '../../static/img/jiucha/11.jpg', null);
+INSERT INTO `goods` VALUES ('12', '人参', '20', '10', '0', '44', '0000-00-00', 'aa', '0', '../../static/img/yangsheng/12\r\n.jpg', null);
+INSERT INTO `goods` VALUES ('13', '苹果', '2', '10', '0', '3', '0000-00-00', 'aa', '0', '../../static/img/shengxian/13\r\n.jpg', null);
+INSERT INTO `goods` VALUES ('14', '居家1', '20', '10', '0', '1', '0000-00-00', 'aa', '0', '../../static/img/jujia/14\r\n.jpg', null);
+INSERT INTO `goods` VALUES ('15', '居家2', '2323', '10', '0', '333', '0000-00-00', 'aa', '0', '', null);
 
 -- ----------------------------
 -- Table structure for `goods_classification`
